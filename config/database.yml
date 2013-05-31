@@ -1,0 +1,25 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+
+development:
+  <<: *defaults
+  host: localhost
+  database: myblog
+  username: AION
+
+test:
+  <<: *defaults
+  host: localhost
+  database: myblog
+  username: AION
+
+production: 
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  database: myblog
+  username: AION
+  pool: 5
