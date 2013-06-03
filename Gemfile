@@ -27,6 +27,8 @@ gem 'devise'
 gem 'less-rails'
 gem 'less-rails-bootstrap'
 
+gem 'paperclip' ,  :git => "git://github.com/thoughtbot/paperclip.git"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
