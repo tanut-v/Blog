@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(params[:comment])
     @comment.user = current_user
     @comment.save
+    UserMailer.notification_email(@post.user,current_user).deliver
     redirect_to posts_path
   end
 end
