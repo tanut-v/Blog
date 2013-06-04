@@ -1,8 +1,11 @@
-<div class="hero-unit">
-        <h1>Welcome to MyBlog</h1>
-        <p>This is my Ruby on Rails demo application,please enjoy!!</p>
-        <p>
-        	
-        	<%= link_to "Sign Up &raquo;".html_safe, new_user_registration_path, :class => "btn btn-primary btn-large" %>
-        </p>
+<div id="container">
+	<% if user_signed_in? %>
+	<% current_user.posts.each do |post| %>
+		<div class="grid">
+			<div class="imgholder"><%= image_tag post.picture.url %></div>
+    		<strong><%= post.content %></strong>
+    		<div class="meta"><%= current_user.first_name %> <%= current_user.last_name %></div>
+    	</div>
+    <% end %>
+    <% end %>
 </div>

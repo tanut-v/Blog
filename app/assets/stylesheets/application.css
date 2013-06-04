@@ -12,6 +12,7 @@
  *= require twitter/bootstrap
  *= require twitter/bootstrap-responsive
  *= require_sign_up
+ *= require_posts
  *= require_tree .
 
  */
