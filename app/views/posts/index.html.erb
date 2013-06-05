@@ -3,21 +3,30 @@
   <div class="grid">
     <div class="imgholder"><%= image_tag post.picture.url %></div>
     <!--<strong><%= post.content %></strong>-->
-    <div class="meta"><%= post.user.first_name %> <%= post.user.last_name %></div>
+    <div class="meta">
+      <i class="icon-heart icon-large pull-left"></i><b class="pull-left"><%= post.likes.count %></b>
+      <%= post.user.first_name %> <%= post.user.last_name %>
+    </div>
+    
     <strong></strong>
-
     <% post.comments.each do |comment| %>
       <div style="padding:2px;">
+
         <%= image_tag comment.user.avatar.url(:thumb) , :width => "30px", :height => "30px", :class => "img-rounded" %>          
         <span class="comment-content"><%= comment.body %></span>
       </div>      
     <% end %>
 
     <% if user_signed_in? %>
-    <%= form_for([post, post.comments.build]) do |f| %>
+      <%= form_for([post, post.comments.build]) do |f| %>
         <%= f.text_area :body, :class => "span2", :rows => "2", :placeholder => "Comment..." %>
+        <% unless post.likes.where( :user_id => current_user.id ).exists? %>
+          <%= link_to '<i class="icon-thumbs-up"></i>'.html_safe , [post, post.likes.build], :class => "btn pull-right" %>
+        <% else %>
+          <%= link_to '<i class="icon-thumbs-down"></i>'.html_safe , [post, post.likes.build], :method => :delete , :class => "btn pull-right" %>
+        <% end %>
         <%= f.submit 'Comment'.html_safe, :class => "btn pull-right" %>
-    <% end %>
+      <% end %>
     <% end %>
   </div>
 <% end %>

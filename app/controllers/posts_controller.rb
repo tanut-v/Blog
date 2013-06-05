@@ -2,7 +2,11 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.limit(5)
+    #@posts = Post.order(Post.likes.count)
+    @posts = Post.find(:all, :select => "posts.*,COALESCE(s.co,0) as count",
+    :joins => 'LEFT OUTER JOIN (select count(post_id) as co,post_id from 
+    "likes" GROUP BY post_id) AS s on posts."id" = s.post_id', 
+    :order => "count desc")
 
     respond_to do |format|
       format.html # index.html.erb
